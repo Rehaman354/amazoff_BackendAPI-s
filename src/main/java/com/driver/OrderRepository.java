@@ -13,6 +13,7 @@ public class OrderRepository {
     HashMap<String, List<String>> partnerOrdersList=new HashMap<>();
 
     public void addOrder(Order order) {
+        if(order!=null)
         orderDb.put(order.getId(),order);
     }
 
@@ -37,11 +38,15 @@ public class OrderRepository {
     }
 
     public Order getOrder(String orderId) {
+        if(orderDb.containsKey(orderId))
         return orderDb.get(orderId);
+        return null;
     }
 
     public DeliveryPartner getPartner(String partnerId) {
+        if(deliverypartnerDb.containsKey(partnerId))
             return deliverypartnerDb.get(partnerId);
+        return null;
     }
 
     public Integer getOrderCountByPartnerId(String partnerId) {
