@@ -43,18 +43,18 @@ public class OrderController {
     @GetMapping("/get-order-by-id/{orderId}")
     public ResponseEntity<Order> getOrderById(@PathVariable String orderId){
 
-        Order order= null;
+        Order order= orderservice.getOrder(orderId);
         //order should be returned with an orderId.
-        order=orderservice.getOrder(orderId);
+
         return new ResponseEntity<>(order, HttpStatus.CREATED);
     }
 
     @GetMapping("/get-partner-by-id/{partnerId}")
     public ResponseEntity<DeliveryPartner> getPartnerById(@PathVariable String partnerId){
 
-        DeliveryPartner deliveryPartner = null;
+        DeliveryPartner deliveryPartner=orderservice.getPartner(partnerId);
         //deliveryPartner should contain the value given by partnerId
-        deliveryPartner=orderservice.getPartner(partnerId);
+
 
         return new ResponseEntity<>(deliveryPartner, HttpStatus.CREATED);
     }
@@ -72,17 +72,15 @@ public class OrderController {
     @GetMapping("/get-orders-by-partner-id/{partnerId}")
     public ResponseEntity<List<String>> getOrdersByPartnerId(@PathVariable String partnerId){
 
-        List<String> orders = null;
+        List<String> orders =orderservice.getOrdersIdByPartnerId(partnerId);
         //orders should contain a list of orders by PartnerId
-        orders=orderservice.getOrdersIdByPartnerId(partnerId);
+
         return new ResponseEntity<>(orders, HttpStatus.CREATED);
     }
 
     @GetMapping("/get-all-orders")
     public ResponseEntity<List<String>> getAllOrders(){
-        List<String> orders = null;
-        //Get all orders
-        orders=orderservice.getAllOrders();
+        List<String> orders= orderservice.getAllOrders();
         return new ResponseEntity<>(orders, HttpStatus.CREATED);
     }
 
@@ -107,7 +105,7 @@ public class OrderController {
 
     @GetMapping("/get-last-delivery-time/{partnerId}")
     public ResponseEntity<String> getLastDeliveryTimeByPartnerId(@PathVariable String partnerId){
-        String time = null;
+        String time;
         //Return the time when that partnerId will deliver his last delivery order.
         time=orderservice.getLastDeliveryTimeByPartnerId(partnerId);
 

@@ -9,7 +9,7 @@ import java.util.List;
 @Repository
 public class OrderRepository {
     HashMap<String,Order> orderDb=new HashMap<>();
-    HashMap<String,DeliveryPartner> deliverypartnerDb=new HashMap<>();
+    HashMap<String, DeliveryPartner> deliverypartnerDb = new HashMap<>();
     HashMap<String, List<String>> partnerOrdersList=new HashMap<>();
 
     public void addOrder(Order order) {
@@ -37,15 +37,11 @@ public class OrderRepository {
     }
 
     public Order getOrder(String orderId) {
-        if(orderDb.containsKey(orderId))
         return orderDb.get(orderId);
-        return null;
     }
 
     public DeliveryPartner getPartner(String partnerId) {
-        if(deliverypartnerDb.containsKey(partnerId))
             return deliverypartnerDb.get(partnerId);
-        return null;
     }
 
     public Integer getOrderCountByPartnerId(String partnerId) {
@@ -70,12 +66,12 @@ public class OrderRepository {
 
     public Integer getCountOfUnassignedOrders() {
        int total= orderDb.size();
-       int assigned=0;
+       int assign=0;
         for(String s:partnerOrdersList.keySet())
         {
-            assigned+=partnerOrdersList.get(s).size();
+            assign+=partnerOrdersList.get(s).size();
         }
-        return total-assigned;
+        return (total-assign);
     }
 
     public Integer getOrdersLeftAfterGivenTimeByPartnerId(String time, String partnerId) {
